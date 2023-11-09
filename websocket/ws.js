@@ -9,7 +9,7 @@ const users = {};
 // Define the event handlers for the WebSocket server
 wss.on('connection', (ws) => {
   // Send a welcome message to the connected client
-  ws.send('Connected to the WebSocket server.');
+  ws.send(JSON.stringify({1:1}));
 
   // Handle messages received from clients
   ws.on('message', (message) => {
@@ -28,6 +28,7 @@ wss.on('connection', (ws) => {
 
       // Log the updated user data
       console.log(`Updated user data: ${JSON.stringify(users)}`);
+      ws.send(`Updated user data: ${JSON.stringify(users)}`);
     } catch (error) {
       console.error('Error parsing message:', error);
     }
