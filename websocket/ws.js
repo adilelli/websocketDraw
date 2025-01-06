@@ -8,6 +8,7 @@ const users = {};
 
 // Define the event handlers for the WebSocket server
 wss.on('connection', (ws) => {
+  console.log(ws);
   // Send a welcome message to the connected client
   ws.send(JSON.stringify({1:1}));
 
@@ -27,8 +28,9 @@ wss.on('connection', (ws) => {
       };
 
       // Log the updated user data
-      console.log(`Updated user data: ${JSON.stringify(users)}`);
-      ws.send(`Updated user data: ${JSON.stringify(users)}`);
+      console.log(`incoming_data: ${JSON.stringify(users)}`);
+      // console.log(ws);
+      ws.send(`${JSON.stringify(users)}`);
     } catch (error) {
       console.error('Error parsing message:', error);
     }
@@ -37,6 +39,7 @@ wss.on('connection', (ws) => {
   // Handle the WebSocket connection closing
   ws.on('close', () => {
     // Clean up the user data when a client disconnects
+    console.log(ws);
     Object.keys(users).forEach((user) => {
       if (users[user] === ws) {
         delete users[user];

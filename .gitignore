@@ -1,2 +1,6 @@
 index.html
 node_modules
+client/conn.js
+.vscode/settings.json
+Archive.zip
+.DS_Store
